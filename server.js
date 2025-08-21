@@ -70,7 +70,7 @@ app.get("/api/checks", async (_req, res) => {
   res.json(checks);
 });
 
-// Get check
+// Get check 
 app.get("/api/checks/:id", async (req, res) => {
   const check = await Check.findById(req.params.id);
   if (!check) return res.status(404).json({ error: "Not found" });
@@ -91,7 +91,7 @@ app.get("/api/checks/:id/results", async (req, res) => {
   res.json(results);
 });
 
-// quick summary (uptime % over last 24h)
+// quick summary (uptime information for last 24h)
 app.get("/api/checks/:id/summary", async (req, res) => {
   const since = new Date(Date.now() - 24 * 3600 * 1000);
   const results = await Result.find({ checkId: req.params.id, createdAt: { $gte: since } });
